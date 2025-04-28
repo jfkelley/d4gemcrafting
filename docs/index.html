@@ -2,23 +2,127 @@
     <head>
         <script src="https://unpkg.com/javascript-lp-solver/prod/solver.js"></script>
         <script>
-var solver = require("./src/solver"),
-model = {
-    "optimize": "profit",
-    "opType": "max",
-    "constraints": {
-        "wood": {"max": 300},
-        "labor": {"max": 110},
-        "storage": {"max": 400}
-    },
-    "variables": {
-        "table": {"wood": 30, "labor": 5, "profit": 1200, "table": 1, "storage": 30},
-        "dresser": {"wood": 20, "labor": 10, "profit": 1600, "dresser": 1, "storage": 50}
-    },
-    "ints": {"table": 1, "dresser": 1}
+function calculate() {
+    var am_diff = document.querySelector("#am_need").value - document.querySelector("#am_cur").value;
+    var di_diff = document.querySelector("#di_need").value - document.querySelector("#di_cur").value;
+    var em_diff = document.querySelector("#em_need").value - document.querySelector("#em_cur").value;
+    var ru_diff = document.querySelector("#ru_need").value - document.querySelector("#ru_cur").value;
+    var sa_diff = document.querySelector("#sa_need").value - document.querySelector("#sa_cur").value;
+    var sk_diff = document.querySelector("#sk_need").value - document.querySelector("#sk_cur").value;
+    var to_diff = document.querySelector("#to_need").value - document.querySelector("#to_cur").value;
+    model = {
+        "optimize": "n_crafts",
+        "opType": "min",
+        "constraints": {
+            "am": {"min": am_diff},
+            "di": {"min": di_diff},
+            "em": {"min": em_diff},
+            "ru": {"min": ru_diff},
+            "sa": {"min": sa_diff},
+            "sk": {"min": sk_diff},
+            "to": {"min": to_diff},
+        },
+        "variables": {
+            "am_craft": {
+                "n_crafts": 1,
+                "am": 200,
+                "di": -100,
+                "ru": -100,
+                "to": -100
+            },
+            "di_craft": {
+                "n_crafts": 1,
+                "di": 200,
+                "am": -100,
+                "em": -100,
+                "sk": -100
+            },
+            "em_craft": {
+                "n_crafts": 1,
+                "em": 200,
+                "am": -100,
+                "sk": -100,
+                "to": -100
+            },
+            "ru_craft": {
+                "n_crafts": 1,
+                "ru": 200,
+                "am": -100,
+                "sa": -100,
+                "to": -100
+            },
+            "sa_craft": {
+                "n_crafts": 1,
+                "sa": 200,
+                "di": -100,
+                "ru": -100,
+                "sk": -100
+            },
+            "sk_craft": {
+                "n_crafts": 1,
+                "sk": 200,
+                "em": -100,
+                "di": -100,
+                "sa": -100
+            },
+            "to_craft": {
+                "n_crafts": 1,
+                "to": 200,
+                "em": -100,
+                "ru": -100,
+                "sa": -100
+            },
+        },
+        "ints": {"am_craft": 1, "di_craft": 1, "em_craft": 1, "ru_craft": 1, "sa_craft": 1, "sk_craft": 1, "to_craft": 1}
+    }
+    console.log(solver.Solve(model));
 }
-console.log(solver.Solve(model));
         </script>
+        <style>
+div.grid-form {
+    display:grid;
+    grid-template-columns: max-content max-content;
+    grid-gap:5px;
+}
+div.grid-form label       { text-align:right; }
+div.grid-form label:after { content: ":"; }
+        </style>
     </head>
-    <body></body>
+    <body>
+        <p>What you have:</p>
+        <div class="grid-form">
+            <label for="am_cur">Amethyst:</label>
+            <input type="number" id="am_cur" name="am_cur" min="0" value="0" />
+            <label for="di_cur">Diamond:</label>
+            <input type="number" id="di_cur" name="di_cur" min="0" value="0" />
+            <label for="em_cur">Emerald:</label>
+            <input type="number" id="em_cur" name="em_cur" min="0" value="0" />
+            <label for="ru_cur">Ruby:</label>
+            <input type="number" id="ru_cur" name="ru_cur" min="0" value="0" />
+            <label for="sa_cur">Sapphire:</label>
+            <input type="number" id="sa_cur" name="sa_cur" min="0" value="0" />
+            <label for="sk_cur">Skull:</label>
+            <input type="number" id="sk_cur" name="sk_cur" min="0" value="0" />
+            <label for="to_cur">Topaz:</label>
+            <input type="number" id="to_cur" name="to_cur" min="0" value="0" />
+        </div>
+        <p>What you need:</p>
+        <div class="grid-form">
+            <label for="am_need">Amethyst:</label>
+            <input type="number" id="am_need" name="am_need" min="0" value="0" />
+            <label for="di_need">Diamond:</label>
+            <input type="number" id="di_need" name="di_need" min="0" value="0" />
+            <label for="em_need">Emerald:</label>
+            <input type="number" id="em_need" name="em_need" min="0" value="0" />
+            <label for="ru_need">Ruby:</label>
+            <input type="number" id="ru_need" name="ru_need" min="0" value="0" />
+            <label for="sa_need">Sapphire:</label>
+            <input type="number" id="sa_need" name="sa_need" min="0" value="0" />
+            <label for="sk_need">Skull:</label>
+            <input type="number" id="sk_need" name="sk_need" min="0" value="0" />
+            <label for="to_need">Topaz:</label>
+            <input type="number" id="to_need" name="to_need" min="0" value="0" />
+        </div>
+        <button onclick="calculate()">Calculate</button>
+    </body>
 </html>
