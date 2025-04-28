@@ -99,12 +99,13 @@ div.grid-form {
     grid-template-columns: max-content max-content;
     grid-gap:5px;
 }
-div.grid-form label       { text-align:right; }
+div.grid-form label { text-align:right; }
 div.grid-form label:after { content: ":"; }
+p.header { font-weight:bold; }
         </style>
     </head>
     <body>
-        <p>What you have:</p>
+        <p class="header">What you have:</p>
         <div class="grid-form">
             <label for="am_cur">Amethyst</label>
             <input type="number" id="am_cur" name="am_cur" min="0" value="0" />
@@ -121,7 +122,7 @@ div.grid-form label:after { content: ":"; }
             <label for="to_cur">Topaz</label>
             <input type="number" id="to_cur" name="to_cur" min="0" value="0" />
         </div>
-        <p>What you need:</p>
+        <p class="header">What you need:</p>
         <div class="grid-form">
             <label for="am_need">Amethyst</label>
             <input type="number" id="am_need" name="am_need" min="0" value="0" />
@@ -138,27 +139,30 @@ div.grid-form label:after { content: ":"; }
             <label for="to_need">Topaz</label>
             <input type="number" id="to_need" name="to_need" min="0" value="0" />
         </div>
-        <div>
+        <p>
             <button onclick="calculate()">Calculate</button>
-        </div>
-        <div id="results" class="grid-form" hidden>
-            <label for="am_craft">Amethyst</label>
-            <p id="am_craft">0</p>
-            <label for="di_craft">Diamond</label>
-            <p id="di_craft">0</p>
-            <label for="em_craft">Emerald</label>
-            <p id="em_craft">0</p>
-            <label for="ru_craft">Ruby</label>
-            <p id="ru_craft">0</p>
-            <label for="sa_craft">Sapphire</label>
-            <p id="sa_craft">0</p>
-            <label for="sk_craft">Skull</label>
-            <p id="sk_craft">0</p>
-            <label for="to_craft">Topaz</label>
-            <p id="to_craft">0</p>
+        </p>
+        <div id="results" hidden>
+            <p class="header">You should craft:</p>
+            <div class="grid-form">
+                <label for="am_craft">Amethyst</label>
+                <div id="am_craft">0</div>
+                <label for="di_craft">Diamond</label>
+                <div id="di_craft">0</div>
+                <label for="em_craft">Emerald</label>
+                <div id="em_craft">0</div>
+                <label for="ru_craft">Ruby</label>
+                <div id="ru_craft">0</div>
+                <label for="sa_craft">Sapphire</label>
+                <div id="sa_craft">0</div>
+                <label for="sk_craft">Skull</label>
+                <div id="sk_craft">0</div>
+                <label for="to_craft">Topaz</label>
+                <div id="to_craft">0</div>
+            </div>
         </div>
         <div id="failure" hidden>
-            <p>Not possible to craft.</p>
+            <p class="header">Not possible to craft.</p>
         </div>
     </body>
 </html>
