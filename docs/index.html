@@ -74,8 +74,23 @@ function calculate() {
             },
         },
         "ints": {"am_craft": 1, "di_craft": 1, "em_craft": 1, "ru_craft": 1, "sa_craft": 1, "sk_craft": 1, "to_craft": 1}
+    };
+    result = solver.Solve(model);
+    console.log(result);
+    if (result.feasible) {
+        document.getElementById("am_craft").innerHTML = result["am_craft"] || 0;
+        document.getElementById("di_craft").innerHTML = result["di_craft"] || 0;
+        document.getElementById("em_craft").innerHTML = result["em_craft"] || 0;
+        document.getElementById("ru_craft").innerHTML = result["ru_craft"] || 0;
+        document.getElementById("sa_craft").innerHTML = result["sa_craft"] || 0;
+        document.getElementById("sk_craft").innerHTML = result["sk_craft"] || 0;
+        document.getElementById("to_craft").innerHTML = result["to_craft"] || 0;
+        document.getElementById("results").hidden = false;
+        document.getElementById("failure").hidden = true;
+    } else {
+        document.getElementById("results").hidden = true;
+        document.getElementById("failure").hidden = false;
     }
-    console.log(solver.Solve(model));
 }
         </script>
         <style>
@@ -91,38 +106,59 @@ div.grid-form label:after { content: ":"; }
     <body>
         <p>What you have:</p>
         <div class="grid-form">
-            <label for="am_cur">Amethyst:</label>
+            <label for="am_cur">Amethyst</label>
             <input type="number" id="am_cur" name="am_cur" min="0" value="0" />
-            <label for="di_cur">Diamond:</label>
+            <label for="di_cur">Diamond</label>
             <input type="number" id="di_cur" name="di_cur" min="0" value="0" />
-            <label for="em_cur">Emerald:</label>
+            <label for="em_cur">Emerald</label>
             <input type="number" id="em_cur" name="em_cur" min="0" value="0" />
-            <label for="ru_cur">Ruby:</label>
+            <label for="ru_cur">Ruby</label>
             <input type="number" id="ru_cur" name="ru_cur" min="0" value="0" />
-            <label for="sa_cur">Sapphire:</label>
+            <label for="sa_cur">Sapphire</label>
             <input type="number" id="sa_cur" name="sa_cur" min="0" value="0" />
-            <label for="sk_cur">Skull:</label>
+            <label for="sk_cur">Skull</label>
             <input type="number" id="sk_cur" name="sk_cur" min="0" value="0" />
-            <label for="to_cur">Topaz:</label>
+            <label for="to_cur">Topaz</label>
             <input type="number" id="to_cur" name="to_cur" min="0" value="0" />
         </div>
         <p>What you need:</p>
         <div class="grid-form">
-            <label for="am_need">Amethyst:</label>
+            <label for="am_need">Amethyst</label>
             <input type="number" id="am_need" name="am_need" min="0" value="0" />
-            <label for="di_need">Diamond:</label>
+            <label for="di_need">Diamond</label>
             <input type="number" id="di_need" name="di_need" min="0" value="0" />
-            <label for="em_need">Emerald:</label>
+            <label for="em_need">Emerald</label>
             <input type="number" id="em_need" name="em_need" min="0" value="0" />
-            <label for="ru_need">Ruby:</label>
+            <label for="ru_need">Ruby</label>
             <input type="number" id="ru_need" name="ru_need" min="0" value="0" />
-            <label for="sa_need">Sapphire:</label>
+            <label for="sa_need">Sapphire</label>
             <input type="number" id="sa_need" name="sa_need" min="0" value="0" />
-            <label for="sk_need">Skull:</label>
+            <label for="sk_need">Skull</label>
             <input type="number" id="sk_need" name="sk_need" min="0" value="0" />
-            <label for="to_need">Topaz:</label>
+            <label for="to_need">Topaz</label>
             <input type="number" id="to_need" name="to_need" min="0" value="0" />
         </div>
-        <button onclick="calculate()">Calculate</button>
+        <div>
+            <button onclick="calculate()">Calculate</button>
+        </div>
+        <div id="results" class="grid-form" hidden>
+            <label for="am_craft">Amethyst</label>
+            <p id="am_craft">0</p>
+            <label for="di_craft">Diamond</label>
+            <p id="di_craft">0</p>
+            <label for="em_craft">Emerald</label>
+            <p id="em_craft">0</p>
+            <label for="ru_craft">Ruby</label>
+            <p id="ru_craft">0</p>
+            <label for="sa_craft">Sapphire</label>
+            <p id="sa_craft">0</p>
+            <label for="sk_craft">Skull</label>
+            <p id="sk_craft">0</p>
+            <label for="to_craft">Topaz</label>
+            <p id="to_craft">0</p>
+        </div>
+        <div id="failure" hidden>
+            <p>Not possible to craft.</p>
+        </div>
     </body>
 </html>
